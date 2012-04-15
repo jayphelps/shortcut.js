@@ -23,13 +23,14 @@ var shortcut = Shortcut.add(element, 'ctrl+a');
 
 ### Remove through JavaScript
 
+If you have a reference to the added Shortcut object can simply call .remove();
+
 ``` javascript
-// If you have a reference to the added Shortcut object can simply call .remove();
 shortcut.remove();
 ```
-OR
+Alternatively, you can pass in the Element and shortcut string.
+
 ``` javascript
-// You can alternatively pass in the Element and equal shortcut string.
 Shortcut.remove(element, 'ctrl+a');
 ```
 
