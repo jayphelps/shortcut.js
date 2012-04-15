@@ -1,7 +1,7 @@
 Shortcut.js
 ======
 
-Simple shortcuts for your HTML elements. Works by triggering a click event on the targeted node; usually on anchor (i.e. "a") tags but works on any.
+Simple shortcuts for your HTML elements. Triggers a click event on the targeted element; usually on anchor (i.e. "a") tags but works on any.
 
 Getting Started
 ---------------
