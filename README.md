@@ -8,17 +8,29 @@ Getting Started
 
 NOTE: Pretty much unusable right now as I need to add the rest of the key codes and normalize the events.
 
-### Via Markup
+### Add through markup
 
 ``` html
 <a href="/some-url" data-shortcut="ctrl+a">Some Url></a>
 ```
 
-### Via JavaScript
+### Add through JavaScript
 
 ``` javascript
 var element = document.getElementById('foo');
-var shortcut = new Shortcut(element, 'ctrl+a');
+var shortcut = Shortcut.add(element, 'ctrl+a');
+```
+
+### Remove through JavaScript
+
+``` javascript
+// If you have a reference to the added Shortcut object can simply call .remove();
+shortcut.remove();
+```
+OR
+``` javascript
+// You can alternatively pass in the Element and equal shortcut string.
+Shortcut.remove(element, 'ctrl+a');
 ```
 
 License
