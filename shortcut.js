@@ -5,13 +5,13 @@
  * https://github.com/jayphelps/shortcut.js
  */
 (function (window, document) {
-    "use strict";
+    'use strict';
 
     function addEventListener(el, eventType, callback, useCapture) {
         if (el.addEventListener) {
             el.addEventListener(eventType, callback, useCapture || false); 
         } else if (el.attachEvent)  {
-            el.attachEvent('on'+eventType, callback);
+            el.attachEvent('on' + eventType, callback);
         }
     }
 
@@ -23,13 +23,13 @@
         }
     }
 
-    function triggerEvent(el, event){
+    function triggerEvent(el, eventType){
         if (el.fireEvent) {
-            (el.fireEvent('on' + event));
+            (el.fireEvent('on' + eventType));
         } else {
-            var evObj = document.createEvent('Events');
-            evObj.initEvent(event, true, false);
-            el.dispatchEvent(evObj);
+            var event = document.createEvent('Events');
+            event.initEvent(eventType, true, false);
+            el.dispatchEvent(event);
         }
     }
 
