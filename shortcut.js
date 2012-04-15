@@ -108,25 +108,11 @@
         shortcut = parseShortcut(shortcut);
 
         return function (e) {
-            if (e.ctrlKey !== shortcut.ctrlKey) {
-                return;
-            }
-
-            if (e.altKey !== shortcut.altKey) {
-                return;
-            }
-
-            if (e.shiftKey !== shortcut.shiftKey) {
-                return;
-            }
-
-            if (e.metaKey !== shortcut.metaKey) {
-                return;
-            }
-
-            if (e.keyCode !== shortcut.keyCode) {
-                return;
-            }
+            if (e.ctrlKey  !== shortcut.ctrlKey)  return;
+            if (e.altKey   !== shortcut.altKey)   return;
+            if (e.shiftKey !== shortcut.shiftKey) return;
+            if (e.metaKey  !== shortcut.metaKey)  return;
+            if (e.keyCode  !== shortcut.keyCode)  return;
 
             triggerEvent(el, 'click');
         };
@@ -150,6 +136,7 @@
         shortcutStorage.push(this);
     }
 
+    Shortcut.attributeName = 'data-shortcut';
     Shortcut.keyEvent = 'keydown';
     Shortcut.delegate = document;
 
@@ -198,21 +185,33 @@
         return Shortcut.remove(this.el, this.shortcut);
     };
 
-    function init() {
+    Shortcut.init = function () {
+        if (Shortcut.isInitialized) return false;
+        Shortcut.isInitialized = true;
+
         var elements = document.getElementsByTagName('*');
+        var attributeName = Shortcut.attributeName;
 
         for (var i = 0, l = elements.length; i < l; i++) {
             var el = elements[i];
-            var shortcut = el.getAttribute('data-shortcut');
+            var shortcut = el.getAttribute(attributeName);
 
             if (shortcut) {
-                new Shortcut(el, shortcut)
+                new Shortcut(el, shortcut);
             }
         }
+
+        return true;
     }
 
-    // Only works for modern browsers. Need to add fallback.
-    addEventListener(document, 'DOMContentLoaded', init, false);
+    // Try to auto-initialize starting with jQuery's DOM Ready helper
+    if (window.jQuery) {
+        jQuery(Shortcut.init);
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', Shortcut.init, false);
+    } else if (window.attachEvent) {
+        window.attachEvent('onload', Shortcut.init);
+    }
 
     window.Shortcut = Shortcut;
 
