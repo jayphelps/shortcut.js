@@ -6,7 +6,7 @@
  */
 (function (window, document) {
     "use strict";
-    
+
     function addEventListener(el, eventType, callback, useCapture) {
         if (el.addEventListener) {
             el.addEventListener(eventType, callback, useCapture || false); 
@@ -211,7 +211,8 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', init, false);
+    // Only works for modern browsers. Need to add fallback.
+    addEventListener(document, 'DOMContentLoaded', init, false);
 
     window.Shortcut = Shortcut;
 
