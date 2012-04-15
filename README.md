@@ -28,7 +28,7 @@ If you have a reference to the added Shortcut object can simply call .remove();
 ``` javascript
 shortcut.remove();
 ```
-Alternatively, you can pass in the Element and shortcut string.
+Alternatively, you can call .remove() on the global Shortcut object, passing in the element node and shortcut string.
 
 ``` javascript
 Shortcut.remove(element, 'ctrl+a');
