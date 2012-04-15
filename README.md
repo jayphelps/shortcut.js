@@ -6,8 +6,6 @@ Simple shortcuts for your HTML elements. Triggers a click event on the targeted 
 Getting Started
 ---------------
 
-NOTE: Pretty much unusable right now as I need to add the rest of the key codes and normalize the events.
-
 ### Add through markup
 
 ``` html
@@ -36,7 +34,9 @@ Shortcut.remove(element, 'ctrl+a');
 
 ### Compatibility
 
-Although it doesn't require jQuery, Shortcut.js currently attempts to auto-initialize itself using jQuery's DOM Ready helper. If not available, it falls back to DOMContentLoaded or window onload for older IE.
+* Not all keys are implemented yet and certain browser quirks aren't normalized. This is on my todo.
+
+* Although it doesn't require jQuery, Shortcut.js currently attempts to auto-initialize itself using jQuery's DOM Ready helper. If not available, it falls back to DOMContentLoaded or window onload for older IE.
 
 License
 ------------
