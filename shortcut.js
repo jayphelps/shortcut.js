@@ -50,6 +50,8 @@
     }
 
     function parseShortcut(shortcut) {
+        if (!shortcut) throw Error('Empty shortcut provided. ' + shortcut);
+
         // Default options
         var options = {
             ctrlKey: false,
@@ -63,6 +65,8 @@
         var keys = shortcut
             .replace(/\s*/g, '')
             .split('+');
+
+        if (!keys.length) throw Error('Invalid shortcut provided: ' + shortcut);
 
         var modifier = matchModifier(keys[0]);
 
@@ -93,6 +97,7 @@
 
     function ShortcutHandler(el, shortcut) {
         shortcut = parseShortcut(shortcut);
+
         return function (e) {
             if (e.ctrlKey !== shortcut.ctrlKey) {
                 return;
