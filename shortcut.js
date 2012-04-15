@@ -6,11 +6,19 @@
  */
 (function (window, document) {
 
-    function addEventListener(el, event, callback, useCapture) {
+    function addEventListener(el, eventType, callback, useCapture) {
         if (el.addEventListener) {
-            el.addEventListener(event, callback, useCapture || false); 
+            el.addEventListener(eventType, callback, useCapture || false); 
         } else if (el.attachEvent)  {
-            el.attachEvent('on'+event, callback);
+            el.attachEvent('on'+eventType, callback);
+        }
+    }
+
+    function removeEventListener(el, eventType, callback, useCapture) {
+        if (el.removeEventListener) {
+            el.removeEventListener(eventType, callback, useCapture || false); 
+        } else if (el.detachEvent)  {
+            el.detachEvent('on' + eventType, callback);
         }
     }
 
@@ -123,11 +131,71 @@
         };
     }
 
+    var shortcutStorage = [];
+
     function Shortcut(el, shortcut) {
-        addEventListener(document, Shortcut.keyEvent, new ShortcutHandler(el, shortcut));
+        var isConstructor = (this instanceof Shortcut);
+
+        if (!isConstructor) throw Error('Shortcut must be called with "new" or you can use Shortcut.add(element, shortcut);');
+
+        this.delegate = Shortcut.delegate;
+        this.el = el;
+        this.shortcut = shortcut;
+        this.keyEvent = Shortcut.keyEvent;
+        this.shortcutHandler = new ShortcutHandler(el, shortcut);
+
+        addEventListener(this.delegate, this.keyEvent, this.shortcutHandler);
+
+        shortcutStorage.push(this);
     }
 
     Shortcut.keyEvent = 'keydown';
+    Shortcut.delegate = document;
+
+    /**
+     * Static helper method
+     */
+    Shortcut.add = function (el, shortcut) {
+        return new Shortcut(el, shortcut);
+    };
+
+    Shortcut.remove = function (el, shortcut) {
+        for (var i = 0, l = shortcutStorage.length; i < l; i++) {
+            // shortcutStorage contains all previously bound shortcut objects
+            var shortcutInstance = shortcutStorage[i];
+
+            // Checking against the actual Element nodes
+            if (shortcutInstance.el !== el) {
+                continue;
+            }
+            
+            // If they provided a shortcut but it doesn't match the current
+            // one we'll move on.
+            if (shortcut && shortcutInstance.shortcut !== shortcut) {
+                continue;
+            }
+
+            // Unbind the event listener to the element itself
+            removeEventListener(
+                shortcutInstance.delegate,
+                shortcutInstance.keyEvent,
+                shortcutInstance.shortcutHandler
+            );
+            
+            // Remove our reference to the shortcut instance
+            shortcutStorage.splice(i, 1);
+            
+            return true;
+        }
+
+        // If reached, that means we didn't find a bound shortcut for the given
+        // element + shortcut combo
+        return false;
+    };
+
+    Shortcut.prototype.remove = function () {
+        return Shortcut.remove(this.el, this.shortcut);
+    };
 
     function init() {
         var elements = document.getElementsByTagName('*');
