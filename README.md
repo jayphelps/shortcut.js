@@ -34,6 +34,10 @@ Alternatively, you can call .remove() on the global Shortcut object, passing in 
 Shortcut.remove(element, 'ctrl+a');
 ```
 
+### Compatibility
+
+Although it doesn't require jQuery, Shortcut.js currently attempts to auto-initialize itself using jQuery's DOM Ready helper. If not available, it falls back to DOMContentLoaded or window onload for older IE.
+
 License
 ------------
 
