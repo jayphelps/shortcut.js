@@ -5,7 +5,8 @@
  * https://github.com/jayphelps/shortcut.js
  */
 (function (window, document) {
-
+    "use strict";
+    
     function addEventListener(el, eventType, callback, useCapture) {
         if (el.addEventListener) {
             el.addEventListener(eventType, callback, useCapture || false); 
