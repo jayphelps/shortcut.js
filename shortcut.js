@@ -119,8 +119,10 @@
     }
 
     function Shortcut(el, shortcut) {
-        addEventListener(document, 'keyup', new ShortcutHandler(el, shortcut));
+        addEventListener(document, Shortcut.keyEvent, new ShortcutHandler(el, shortcut));
     }
+
+    Shortcut.keyEvent = 'keydown';
 
     function init() {
         var elements = document.getElementsByTagName('*');
