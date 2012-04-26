@@ -28,7 +28,7 @@
             (el.fireEvent('on' + eventType));
         } else {
             var event = document.createEvent('Events');
-            event.initEvent(eventType, true, false);
+            event.initEvent(eventType, true, true);
             el.dispatchEvent(event);
         }
     }
