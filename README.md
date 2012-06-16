@@ -11,14 +11,14 @@ Getting Started
 ### Add through markup
 
 ``` html
-<a href="/some-url" data-shortcut="ctrl+a">Some Url></a>
+<a href="/some-url" data-shortcut="ctrl+a+b">Some Url></a>
 ```
 
 ### Add through JavaScript
 
 ``` javascript
 var element = document.getElementById('foo');
-var shortcut = Shortcut.add(element, 'ctrl+a');
+var shortcut = Shortcut.add(element, 'ctrl+a+b');
 ```
 
 ### Remove through JavaScript
@@ -31,7 +31,7 @@ shortcut.remove();
 Alternatively, you can call .remove() on the global Shortcut object, passing in the element node and shortcut string.
 
 ``` javascript
-Shortcut.remove(element, 'ctrl+a');
+Shortcut.remove(element, 'ctrl+a+b');
 ```
 
 ### Compatibility
