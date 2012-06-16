@@ -1,7 +1,7 @@
 Shortcut.js
 ======
 
-Add keyboard shortcuts for your HTML elements to make your web app more accessible. Triggers a click event on the targeted element; usually on anchor (i.e. "a") tags but works on any.
+Add keyboard shortcuts for your HTML elements to make your web app more accessible. Triggers a click event on the targeted element; usually on anchor (i.e. "a") tags but works on any, including plain old divs.
 
 NOTE: If all you want is simple one character shortcuts on elements that allow focus, you should just use the [accesskey](http://en.wikipedia.org/wiki/Access_key) HTML attribute built into every modern browser.
 
