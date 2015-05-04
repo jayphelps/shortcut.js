@@ -1,3 +1,5 @@
+# *This project is woefully outdated, incomplete, and naive. Don't use it, much better projects exist. Only keeping for historical reasons*
+
 Shortcut.js
 ======
 
